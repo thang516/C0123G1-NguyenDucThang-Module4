@@ -42,12 +42,10 @@ public class DictionaryRepository implements IDictionaryRepository{
 
     @Override
     public String translation(String englishWord) {
-        Set<String> stringSet = listWord.keySet();
-        for (String x: stringSet) {
-            if(x.equals(englishWord)){
-                return listWord.get(x) ;
-            }
-        }
-        return "Not Found";
+                 if ((listWord.get( englishWord ))!=null){
+                     return listWord.get( englishWord);
+                 }else {
+                     return "Không tìm thấy";
+                 }
     }
 }

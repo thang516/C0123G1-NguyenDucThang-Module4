@@ -20,9 +20,8 @@
            <input  type="text" name="englishWord">
        </div>
         <button style="margin-top: 15px;margin-left: 51px" >Translation</button>
-
-        <h2 style="color: green">Result search: ${result}</h2>
     </form>
+    <h2 style="color: green">Result search: ${result}</h2>
 </div>
 </body>
 </html>

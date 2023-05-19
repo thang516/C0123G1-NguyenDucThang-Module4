@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class CurrencyConversion {
+public class CurrencyConversionController {
     @Autowired
     private ICurrencyConversionService currencyConversionService ;
 
@@ -20,7 +20,7 @@ public class CurrencyConversion {
 
     @PostMapping("/")
     public String calculation (Model model , @RequestParam(value = "dollarAmount")int dollarAmount ,@RequestParam(value = "exchangeRate")int exchangeRate){
-        int result = currencyConversionService.calculation(exchangeRate,dollarAmount);
+        int result = currencyConversionService.calculate(exchangeRate,dollarAmount);
         model.addAttribute("result",result);
         return "form";
 

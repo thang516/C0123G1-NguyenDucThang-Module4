@@ -28,11 +28,10 @@
             <div style="text-align: center">
         <button type="submit"  >Calculate</button>
             </div>
-        <h1 style="color: green;text-align: center ;padding-top: 20px">Result: ${result}</h1>
     </form>
 
 </div>
-
+<h1 style="color: green;text-align: center ;padding-top: 20px">Result: ${result}</h1>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
