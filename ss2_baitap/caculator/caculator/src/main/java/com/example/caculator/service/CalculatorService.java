@@ -8,18 +8,18 @@ public class CalculatorService implements ICalculatorService{
     public double calculate(Double number1, Double number2, String calculator) {
         double result = 0;
         switch (calculator){
-            case "Addition(+)":
+            case "addition":
               result =  number1 + number2 ;
                 break;
-            case "Subtraction(-)":
+            case "subtraction":
                 result= number1 - number2 ;
                 break;
 
-            case "Multiplication(x)":
+            case "multiplication":
                 result = number1 * number2 ;
                 break;
 
-            case "Division(/)":
+            case "division":
                 try {
                     result= number1/number2;
                 }

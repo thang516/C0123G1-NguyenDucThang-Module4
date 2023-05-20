@@ -10,10 +10,10 @@
     <input type="number" placeholder="Enter any Number" name="number1">
     <input type="number" placeholder="Enter any Number" name="number2">
     <div style="margin-top: 15px">
-        <button type="submit" value="Addition(+)" name="calculator">Addition(+)</button>
-        <button type="submit" value="Subtraction(-)" name="calculator">Subtraction(-)</button>
-        <button type="submit" value="Multiplication(x)" name="calculator">Multiplication(x)</button>
-        <button type="submit" value="Division(/)" name="calculator">Division(/)</button>
+        <button type="submit" value="addition" name="calculator">Addition(+)</button>
+        <button type="submit" value="subtraction" name="calculator">Subtraction(-)</button>
+        <button type="submit" value="multiplication" name="calculator">Multiplication(x)</button>
+        <button type="submit" value="division" name="calculator">Division(/)</button>
 </div>
 
 </form>
