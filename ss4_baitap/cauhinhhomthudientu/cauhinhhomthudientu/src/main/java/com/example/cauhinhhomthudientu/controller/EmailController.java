@@ -15,21 +15,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class EmailController {
 
     @Autowired
-    private IEmailService emailService ;
+    private IEmailService emailService;
 
     @GetMapping("/email")
-    public String home(Model model){
+    public String home(Model model) {
         Email email = emailService.getAll();
-        model.addAttribute("email",email);
-            return "index";
+        model.addAttribute("email", email);
+        return "index";
 
     }
+
     @PostMapping("/email/update")
-    public String update(@ModelAttribute("email") Email email ,Model model){
+    public String update(@ModelAttribute("email") Email email, Model model) {
 
         emailService.update(email);
         String mess = "update successfully";
-            model.addAttribute("mess",mess);
+        model.addAttribute("mess", mess);
         return "index";
     }
 }

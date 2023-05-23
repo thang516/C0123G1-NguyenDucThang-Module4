@@ -1,10 +1,10 @@
 package com.example.cauhinhhomthudientu.model;
 
 public class Email {
-    private String languages ;
-    private  Integer pageSize ;
-    private Boolean spamsFilter ;
-    private  String signature ;
+    private String languages;
+    private Integer pageSize;
+    private Boolean spamsFilter;
+    private String signature;
 
     public Email() {
     }

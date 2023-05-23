@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.cauhinhhomthudientu.repository.IEmailRepository;
 
 @Service
-public class EmailService implements IEmailService{
+public class EmailService implements IEmailService {
 
     @Autowired
     private IEmailRepository emailRepository;

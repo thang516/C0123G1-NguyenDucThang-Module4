@@ -7,9 +7,9 @@
 </head>
 <body>
 <form:form action="/email/update" method="post" modelAttribute="email">
-    <div >
+    <div>
         <label>Languages</label>
-        <form:select path="languages"  cssStyle="height: 30px;width: 200px;margin-left: 26px;">
+        <form:select path="languages" cssStyle="height: 30px;width: 200px;margin-left: 26px;">
             <form:option value="English">English</form:option>
             <form:option value="Vietnamese">Vietnamese </form:option>
             <form:option value="Japanese">Japanese</form:option>
@@ -31,15 +31,16 @@
         </form:select>
         <label> emails her page</label>
     </div>
-   <div style="margin-top: 20px;">
-       <label>Spams filter </label>
-       <form:radiobutton path="spamsFilter" cssStyle="  margin-left: 17px;"/>Enable spams filter
-   </div>
+    <div style="margin-top: 20px;">
+        <label>Spams filter </label>
+        <form:radiobutton path="spamsFilter" cssStyle="  margin-left: 17px;"/>Enable spams filter
+    </div>
 
-        <div style="margin-top: 20px">
-            <label>Signature</label>
-            <form:textarea  type="text" name="signature" path="signature" cssStyle="    margin-left: 30px; width: 200px; height: 59px;"/>
-        </div>
+    <div style="margin-top: 20px">
+        <label>Signature</label>
+        <form:textarea type="text" name="signature" path="signature"
+                       cssStyle="    margin-left: 30px; width: 200px; height: 59px;"/>
+    </div>
 
 
     <button style="margin: 33px" type="submit">Update</button>
