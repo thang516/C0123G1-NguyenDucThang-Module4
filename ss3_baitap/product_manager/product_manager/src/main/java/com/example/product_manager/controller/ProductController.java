@@ -34,15 +34,15 @@ public class ProductController {
     @PostMapping("/save")
     public String save(@ModelAttribute("product") Product product, RedirectAttributes redirect) {
         boolean check = true;
-        List<Product> productList =  productService.getAll();
-        for (int i = 0; i < productList.size() ; i++) {
-            if(product.getId()==productList.get(i).getId()){
+        List<Product> productList = productService.getAll();
+        for (int i = 0; i < productList.size(); i++) {
+            if (product.getId() == productList.get(i).getId()) {
                 redirect.addFlashAttribute("massage", "Already Exist");
                 check = false;
                 break;
             }
         }
-        if(check){
+        if (check) {
             productService.save(product);
             redirect.addFlashAttribute("success", "Save Product Successfully");
         }
@@ -62,9 +62,9 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @GetMapping("/{id}/delete")
-    public String delete(@ModelAttribute Product product, RedirectAttributes redirect) {
-        productService.delete(product.getId());
+    @GetMapping("/delete")
+    public String delete(@RequestParam("deleteId") Integer deleteId, RedirectAttributes redirect) {
+        productService.delete(deleteId);
         redirect.addFlashAttribute("success", "Removed Product Successfully");
         return "redirect:/product";
     }

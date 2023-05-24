@@ -1,20 +1,8 @@
-package com.example.product_manager.model;
+package com.example.demo.model;
 
-import com.sun.istack.NotNull;
-import org.hibernate.annotations.Check;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "product")
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "name_product", columnDefinition = "VARCHAR(100)", nullable = false)
     private String name;
-    @Column(name = "price", columnDefinition = "INT", nullable = false)
     private Integer price;
     private String description;
     private String producer;
