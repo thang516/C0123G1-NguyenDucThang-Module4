@@ -3,12 +3,18 @@ package com.example.blog.model;
 
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Blog {
+
+
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
     @NotNull
@@ -18,18 +24,39 @@ public class Blog {
     @NotNull
     private String author ;
 
-    @NotNull
-    private  String dateOfWriting ;
 
+    @Column(name = "createTime", nullable = false,updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
+    @CreationTimestamp
+    private LocalDateTime createTime;
+
+    @Column(name = "updateTime", nullable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
+    @UpdateTimestamp
+    private LocalDateTime updateTime;
     public Blog() {
     }
 
-    public Blog(Integer id, String title, String content, String author, String dateOfWriting) {
+    public Blog(Integer id, String title, String content, String author) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
-        this.dateOfWriting = dateOfWriting;
+    }
+
+    public Blog(String title, String content, String author, LocalDateTime createTime, LocalDateTime updateTime) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public Blog(Integer id, String title, String content, String author, LocalDateTime createTime, LocalDateTime updateTime) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
     public Integer getId() {
@@ -64,11 +91,19 @@ public class Blog {
         this.author = author;
     }
 
-    public String getDateOfWriting() {
-        return dateOfWriting;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setDateOfWriting(String dateOfWriting) {
-        this.dateOfWriting = dateOfWriting;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 }

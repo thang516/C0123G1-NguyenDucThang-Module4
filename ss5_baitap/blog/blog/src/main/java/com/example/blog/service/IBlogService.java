@@ -7,4 +7,12 @@ import java.util.List;
 
 public interface IBlogService {
     List<Blog> getAll();
+
+    void save(Blog blog);
+
+    void delete(Integer deleteId );
+
+    Blog findById(Integer id);
+
+    void update(Blog blog);
 }
