@@ -22,6 +22,6 @@ public interface IBlogService {
 
     List<Blog> search(String title);
 
-    List<Blog> findCategory(Category category);
+    List<Blog> findCategory(String categoryName);
 
 }

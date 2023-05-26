@@ -55,8 +55,8 @@ public class BlogService implements IBlogService {
 
 
     @Override
-    public List<Blog> findCategory(Category category) {
+    public List<Blog> findCategory(String categoryName) {
 
-        return blogRepository.findAllByCategory(category) ;
+        return blogRepository.findCategory(categoryName) ;
     }
 }

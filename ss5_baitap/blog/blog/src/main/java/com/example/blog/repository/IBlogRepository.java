@@ -11,11 +11,9 @@ import java.util.List;
 public interface IBlogRepository extends JpaRepository<Blog,Integer> {
     List<Blog>  findAllByTitle(String title);
 
-    List<Blog> findAllByCategory(Category category);
+    @Query(value = "select s from Blog  s where category.nameCategory  like :category ")
+    List<Blog> findCategory(String category);
 
-
-//   List<Blog> findAllByCategory (Category category);
-
-//    @Query(value = "SELECT * FROM  blog AS b WHERE b.title LIKE :title ", nativeQuery = true)
-//    List<Blog> search(@Param("title") String title);
+//    @Query(value = "SELECT * FROM blog b WHERE b.category like :category", nativeQuery = true)
+//    List<Blog> findCategory(String categoryName);
 }

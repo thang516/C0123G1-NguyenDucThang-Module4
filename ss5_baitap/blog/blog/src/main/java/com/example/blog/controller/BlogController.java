@@ -74,15 +74,10 @@ public class BlogController {
         return "/index";
     }
 
-   @GetMapping("/find")
-    public  String find(Model model){
-        model.addAttribute("blog",new Blog());
-    model.addAttribute("categoryList",categoryService.getAll());
-    return "/index";
-}
+
     @PostMapping("/findCategory")
-    public  String findCategory(@ModelAttribute("category") Category category, Model model){
-        List<Blog> blogList = blogService.findCategory(category);
+    public  String findCategory(@RequestParam("categoryName") String categoryName, Model model){
+        List<Blog> blogList = blogService.findCategory(categoryName);
         model.addAttribute("blogList",blogList);
         return "/index";
     }
