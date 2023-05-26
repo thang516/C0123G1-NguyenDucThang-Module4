@@ -1,6 +1,8 @@
 package com.example.blog.service;
 
 import com.example.blog.model.Blog;
+import com.example.blog.model.Category;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,4 +17,11 @@ public interface IBlogService {
     Blog findById(Integer id);
 
     void update(Blog blog);
+
+    Page<Blog> getAllPage(int page);
+
+    List<Blog> search(String title);
+
+    List<Blog> findCategory(Category category);
+
 }

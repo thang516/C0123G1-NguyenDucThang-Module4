@@ -1,9 +1,13 @@
 package com.example.blog.service.impl;
 
 import com.example.blog.model.Blog;
+import com.example.blog.model.Category;
 import com.example.blog.repository.IBlogRepository;
 import com.example.blog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +41,22 @@ public class BlogService implements IBlogService {
     @Override
     public void update(Blog blog) {
         blogRepository.save(blog);
+    }
+    @Override
+    public Page<Blog> getAllPage(int page) {
+        return blogRepository.findAll(PageRequest.of(page,3, Sort.by("createTime").descending()));
+    }
+    @Override
+    public List<Blog> search(String title) {
+
+        return blogRepository.findAllByTitle(title);
+    }
+
+
+
+    @Override
+    public List<Blog> findCategory(Category category) {
+
+        return blogRepository.findAllByCategory(category) ;
     }
 }

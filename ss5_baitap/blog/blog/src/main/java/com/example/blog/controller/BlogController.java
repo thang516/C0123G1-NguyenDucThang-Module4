@@ -2,8 +2,12 @@ package com.example.blog.controller;
 
 
 import com.example.blog.model.Blog;
+import com.example.blog.model.Category;
+import com.example.blog.repository.ICategoryRepository;
 import com.example.blog.service.IBlogService;
+import com.example.blog.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,38 +20,46 @@ import java.util.List;
 public class BlogController {
     @Autowired
     private IBlogService blogService;
+    @Autowired
+    private ICategoryService categoryService ;
 
     @GetMapping("")
-    public String index(Model model){
-        List<Blog> blogList = blogService.getAll();
+    public String index(@RequestParam(value = "page", defaultValue = "0")int  page, Model model){
+        Page<Blog> blogList = blogService.getAllPage(page);
         model.addAttribute("blogList",blogList);
         return "/index";
     }
     @GetMapping("/create")
     public  String create(Model model){
         model.addAttribute("blog",new Blog());
+        model.addAttribute("categoryList",categoryService.getAll());
         return "/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Blog blog , RedirectAttributes redirect){
+    public String save(@ModelAttribute Blog blog ,@ModelAttribute Category category, RedirectAttributes redirect){
         blogService.save(blog);
+        categoryService.save(category);
         redirect.addFlashAttribute("mess","Add New Successfully");
         return "redirect:/blog";
     }
     @GetMapping("/delete")
-    public  String delete(@RequestParam("deleteId") Integer deleteId){
+    public  String delete(@RequestParam("deleteId") Integer deleteId, RedirectAttributes redirect){
         blogService.delete(deleteId);
+
+        redirect.addFlashAttribute("mess","Delete Successfully");
         return "redirect:/blog";
     }
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") Integer id ,Model model ){
         model.addAttribute("blog",blogService.findById(id));
+        model.addAttribute("categoryList",categoryService.getAll());
         return "/edit";
     }
     @PostMapping("/update")
-    public  String update(@ModelAttribute("blog") Blog blog){
+    public  String update(@ModelAttribute("blog") Blog blog,RedirectAttributes redirect){
         blogService.update(blog);
+        redirect.addFlashAttribute("mess","Update  Successfully");
         return "redirect:/blog";
     }
     @GetMapping("/{id}/view")
@@ -55,5 +67,26 @@ public class BlogController {
         model.addAttribute("blog",blogService.findById(id));
         return "/view";
     }
+    @PostMapping("/search")
+    public  String search(@RequestParam("title") String title, Model model){
+      List<Blog> blogList = blogService.search(title);
+      model.addAttribute("blogList",blogList);
+        return "/index";
+    }
+
+   @GetMapping("/find")
+    public  String find(Model model){
+        model.addAttribute("blog",new Blog());
+    model.addAttribute("categoryList",categoryService.getAll());
+    return "/index";
+}
+    @PostMapping("/findCategory")
+    public  String findCategory(@ModelAttribute("category") Category category, Model model){
+        List<Blog> blogList = blogService.findCategory(category);
+        model.addAttribute("blogList",blogList);
+        return "/index";
+    }
+
+
 
 }
