@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>UserName</th>
+    <th>Pass</th>
+    <th>confirm</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Gender</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="users : ${userList} ">
+    <td th:text="${users.getId()}"></td>
+    <td th:text="${users.getUserName()}"></td>
+    <td th:text="${users.getPass()}"></td>
+    <td th:text="${users.getConfirmPass()}"></td>
+    <td th:text="${users.getName()}"></td>
+    <td th:text="${users.getPhone()}"></td>
+    <td th:text="${users.getEmail()}"></td>
+    <td th:text="${users.getGender()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

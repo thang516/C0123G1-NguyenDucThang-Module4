@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <form th:action="@{/product/search}" method="post" th:object="${productList}">
+        <label>Search</label>
+        <input type="text" placeholder="name" name="name"/>
+        <button type="submit">Search</button>
+    </form>
+    <a th:href="@{/product}">
+        <button type="button"> cancel</button>
+    </a>
+</div>
+
+
+<div th:if="${mess}">
+    <span id="inputId" th:text="${mess}"></span>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Create Time</th>
+        <th>Time Update</th>
+        <th>Function</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${productList}">
+        <td th:text="${product.getId()}"></td>
+        <td th:text="${product.getName()}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td th:text="${product.getDescription()}"></td>
+        <td th:text="${product.getCreateTime()}"></td>
+        <td th:text="${product.getUpdateTime()}"></td>
+        <td><a th:href="@{/product/{id}/edit(id=${product.getId()})} ">
+            <button type="submit">Update</button>
+        </a></td>
+        <td>
+            <button class="btn btn-outline-warning"
+                    th:attr="onclick=|infoDelete(${product.getId()},'${product.getName()}')|">Delete
+            </button>
+            <a style="display: none" id="actionDelete"></a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+<div>
+   <a  th:href="@{/product(page=${productList.number -1 })}"
+        th:if="${productList.hasPrevious()}" >Previous</a>
+   <a  th:href="@{/product(page=${productList.number  +1 })}" th:if="${productList.hasNext()}">Next</a>
+
+</div>
+
+<a th:href="@{/product/create}">
+    <button type="submit">Create</button>
+</a>
+</body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    let inputId = document.getElementById("inputId");
+    if (inputId && inputId.innerText) {
+        swal({
+            title: "Good job!",
+            text: inputId.innerText,
+            icon: "success",
+            button: "Aww yiss!",
+        });
+    }
+</script>
+<script>
+    function infoDelete(id, name) {
+
+        swal({
+            title: `Are you sure delete Product '${name}' ??? `,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const actionDelete = document.getElementById('actionDelete');
+                    actionDelete.setAttribute('href', `/product/delete?deleteId=${id}`)
+                    actionDelete.click();
+                }
+
+            })
+    }
+
+</script>
+</html>

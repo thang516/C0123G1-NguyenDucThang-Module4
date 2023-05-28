@@ -8,6 +8,7 @@ import com.example.blog.service.IBlogService;
 import com.example.blog.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +70,7 @@ public class BlogController {
     }
     @PostMapping("/search")
     public  String search(@RequestParam("title") String title, Model model){
+        Pageable pageable = P
       List<Blog> blogList = blogService.search(title);
       model.addAttribute("blogList",blogList);
         return "/index";

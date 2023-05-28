@@ -14,10 +14,10 @@
 </div>
 
 <div>
-    <div style="display: flex;justify-content: end">
+    <div style="display: flex;justify-content: end;padding: 20px 82px">
         <form th:action="@{/blog/findCategory}"  th:object="${blogList}" method="post">
             <div class="form-input" style="display: flex">
-                <span style="margin-left: 5px;margin-top: 5px">Search</span>
+                <span style="margin-left: 5px;margin-top: 5px">Watch Category </span>
                 <input type="text"  class="form-control"   placeholder="nameCategory" name="categoryName"/>
                 <button class="btn btn-success" style="color: black;background-color: palevioletred">Search</button>
             </div>
@@ -62,7 +62,6 @@
             <th>Create Time</th>
             <th>Update time</th>
             <th>Category</th>
-
             <th></th>
             <th>Function</th>
         </tr>
@@ -100,20 +99,19 @@
         </tbody>
     </table>
 
-
-<!--    <div>-->
-<!--        <nav style="margin-left: 400px ; display: flex;justify-content: end;" aria-label="Page navigation example">-->
-<!--            <ul class="pagination justify-content-end">-->
-<!--                <li class="page-item disabled">-->
-<!--                <li><a class="page-link" th:href="@{/blog(page=${blogList.number -1 })}"-->
-<!--                       th:if="${blogList.hasPrevious()}" tabindex="-1">Previous</a></li>-->
-<!--                <li class="page-item">-->
-<!--                <li><a class="page-link" th:href="@{/blog(page=${blogList.number  +1 })}" th:if="${blogList.hasNext()}">Next</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--    </div>-->
-<!--</div>-->
+    <div>
+        <nav style="margin-left: 400px ; display: flex;justify-content: end;" aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                <li><a class="page-link" th:href="@{/blog(page=${blogList.number -1 })}"
+                       th:if="${blogList.hasPrevious()}" tabindex="-1">Previous</a></li>
+                <li class="page-item">
+                <li><a class="page-link" th:href="@{/blog(page=${blogList.number  +1 })}" th:if="${blogList.hasNext()}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
 
 
 <!-- Modal -->
