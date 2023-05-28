@@ -3,6 +3,7 @@ package com.example.blog.service;
 import com.example.blog.model.Blog;
 import com.example.blog.model.Category;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public interface IBlogService {
 
     Page<Blog> getAllPage(int page);
 
-    List<Blog> search(String title);
+    Page<Blog> search(String title, Pageable page);
 
-    List<Blog> findCategory(String categoryName);
+    Page<Blog> findCategory(String categoryName,Pageable pageable );
 
 }

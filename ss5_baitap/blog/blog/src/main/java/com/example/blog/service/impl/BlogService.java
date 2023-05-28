@@ -7,6 +7,7 @@ import com.example.blog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -46,17 +47,19 @@ public class BlogService implements IBlogService {
     public Page<Blog> getAllPage(int page) {
         return blogRepository.findAll(PageRequest.of(page,3, Sort.by("createTime").descending()));
     }
-    @Override
-    public List<Blog> search(String title) {
 
-        return blogRepository.findAllByTitle(title);
+
+    @Override
+    public Page<Blog> search(String title,Pageable pageable) {
+
+        return blogRepository.findAllByTitle(title,pageable);
     }
 
 
 
     @Override
-    public List<Blog> findCategory(String categoryName) {
+    public Page<Blog> findCategory(String categoryName,Pageable pageable) {
 
-        return blogRepository.findCategory(categoryName) ;
+        return blogRepository.findCategory(categoryName,pageable) ;
     }
 }
