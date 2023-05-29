@@ -1,7 +1,7 @@
 package com.example.demologin2.controller;
 
-import com.example.demologin2.model.User;
 import com.example.demologin2.service.IUserService;
+import com.example.demologin2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -31,6 +31,30 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updateTime ;
 
+    @ManyToOne
+    @JoinColumn
+    private Producer producer ;
+    public Product(String name, Double price, String description, LocalDateTime createTime, LocalDateTime updateTime, Producer producer) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.producer = producer;
+    }
+
+
+
+    public Product(Integer id, String name, Double price, String description, LocalDateTime createTime, LocalDateTime updateTime, Producer producer) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.producer = producer;
+    }
+
     public Product(Integer id, String name, Double price, String description, LocalDateTime createTime, LocalDateTime updateTime) {
         this.id = id;
         this.name = name;
@@ -103,5 +127,13 @@ public class Product {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
     }
 }

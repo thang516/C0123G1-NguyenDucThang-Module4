@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${mess}">
+  <span th:text="${mess}"></span>
+
+</div>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone</th>
+    <th>Age</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${userList}">
+    <td th:text="${user.getId()}"></td>
+    <td th:text="${user.getFirstName()}"></td>
+    <td th:text="${user.getLastName()}"></td>
+    <td th:text="${user.getPhone()}"></td>
+    <td th:text="${user.getAge()}"></td>
+    <td th:text="${user.getEmail()}"></td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/user/create}"><button >Create</button>
+</a>
+</body>
+</html>

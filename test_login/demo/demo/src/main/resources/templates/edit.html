@@ -15,7 +15,14 @@
         <input type="number" th:field="*{price}"/>
         <label>Description</label>
         <input type="text" th:field="*{description}"/>
+        <label >Producer</label>
 
+        <select style="margin-top: 20px;width: 35vw; height: 6vh;" th:field="*{producer}">
+            <option th:each="producers : ${producerList}"
+                    th:text="${producers.producerName}" th:value="${producers.id}">
+
+            </option>
+        </select>
         <button type="submit">Edit</button>
     </form>
     <a th:href="@{/product}">  <button type="button">Cancel</button>

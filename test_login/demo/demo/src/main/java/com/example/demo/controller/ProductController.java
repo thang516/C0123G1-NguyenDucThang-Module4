@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Producer;
 import com.example.demo.model.Product;
+import com.example.demo.service.IProducerService;
 import com.example.demo.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,23 +20,29 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private IProducerService producerService;
 
     @GetMapping("")
     public String index(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
         Page<Product> productList = productService.getAllPage(page);
+        Page<Producer> producerList = producerService.getAllPage(page);
         model.addAttribute("productList", productList);
+        model.addAttribute("ProducerList", producerList);
         return "/index";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("producerList",producerService.getAll());
         return "/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("product") Product product, RedirectAttributes redirect) {
+    public String save(@ModelAttribute("product") Product product,@ModelAttribute("producer") Producer producer, RedirectAttributes redirect) {
         productService.save(product);
+        producerService.save(producer);
         redirect.addFlashAttribute("mess", "Thêm mới thành công ");
         return "redirect:/product";
     }
@@ -49,6 +57,7 @@ public class ProductController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("product", productService.findAll(id));
+        model.addAttribute("producerList" , producerService.getAll());
         return "/edit";
     }
 
@@ -72,4 +81,5 @@ public class ProductController {
 
         return "/login";
     }
+
 }

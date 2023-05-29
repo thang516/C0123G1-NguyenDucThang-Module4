@@ -36,6 +36,7 @@
         <th>Description</th>
         <th>Create Time</th>
         <th>Time Update</th>
+        <th>Producer</th>
         <th>Function</th>
     </tr>
     </thead>
@@ -47,6 +48,9 @@
         <td th:text="${product.getDescription()}"></td>
         <td th:text="${product.getCreateTime()}"></td>
         <td th:text="${product.getUpdateTime()}"></td>
+        <td th:text="${product.getProducer().getProducerName()}"></td>
+
+
         <td><a th:href="@{/product/{id}/edit(id=${product.getId()})} ">
             <button type="submit">Update</button>
         </a></td>
