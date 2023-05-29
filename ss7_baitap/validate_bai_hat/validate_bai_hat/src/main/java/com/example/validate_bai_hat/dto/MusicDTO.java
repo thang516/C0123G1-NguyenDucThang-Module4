@@ -15,19 +15,19 @@ import javax.validation.constraints.Size;
 public class MusicDTO implements Validator {
 
 
-    private Integer id ;
+    private Integer id;
 
-    @Size(max = 800 ,message = "Tên bài nhạc không được quá 800 ký tự  ")
+    @Size(max = 800, message = "Tên bài nhạc không được quá 800 ký tự  ")
     @NotBlank(message = "Không được để trống")
-    @Pattern(regexp = "^[A-Za-z0-9 ]{1,800}$" , message = "Tên bài hát  Không được chứa kí tự đặc biệt")
-    private String  name;
-    @Size(max = 300 ,message = " Tên Nghệ sĩ không được quá 300 ký tự  ")
+    @Pattern(regexp = "^[A-Za-z0-9 ]{1,800}$", message = "Tên bài hát  Không được chứa kí tự đặc biệt")
+    private String name;
+    @Size(max = 300, message = " Tên Nghệ sĩ không được quá 300 ký tự  ")
     @NotBlank(message = "Không được để trống")
-    @Pattern(regexp = "^[A-Za-z0-9 ]{1,300}$" , message = "Tên nghệ sĩ  Không được chứa kí tự đặc biệt")
+    @Pattern(regexp = "^[A-Za-z0-9 ]{1,300}$", message = "Tên nghệ sĩ  Không được chứa kí tự đặc biệt")
     private String artis;
-    @Size(max = 1000 ,message = " Thể loại nhạc  không được quá 1000 ký tự  ")
+    @Size(max = 1000, message = " Thể loại nhạc  không được quá 1000 ký tự  ")
     @NotBlank(message = "Không được để trống")
-    @Pattern(regexp = "^[A-Za-z0-9, ]{1,1000}$" , message = "Thể loại nhạc  Không được chứa kí tự đặc biệt và dấu phẩy")
+    @Pattern(regexp = "^[A-Za-z0-9, ]{1,1000}$", message = "Thể loại nhạc  Không được chứa kí tự đặc biệt và dấu phẩy")
     private String kindOfMusic;
 
     public MusicDTO(Integer id, String name, String artis, String kindOfMusic) {
@@ -79,7 +79,6 @@ public class MusicDTO implements Validator {
     }
 
 
-
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -90,8 +89,8 @@ public class MusicDTO implements Validator {
         MusicDTO musicDTO = (MusicDTO) target;
         String regex = "^[A-Za-z0-9 ]{1,800}$";
 
-        if(!musicDTO.name.matches(regex)){
-            errors.rejectValue("name" , "","tên bài hát không hợp lệ");
+        if (!musicDTO.name.matches(regex)) {
+            errors.rejectValue("name", "", "tên bài hát không hợp lệ");
         }
 
     }

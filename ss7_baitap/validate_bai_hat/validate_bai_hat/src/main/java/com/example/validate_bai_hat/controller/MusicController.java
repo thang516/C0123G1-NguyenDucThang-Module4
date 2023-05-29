@@ -21,43 +21,45 @@ public class MusicController {
     private IMusicService musicService;
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(Model model) {
         List<Music> musicList = musicService.findAll();
-        model.addAttribute("musicList",musicList);
+        model.addAttribute("musicList", musicList);
         return "/index";
     }
 
     @GetMapping("/create")
-    public String create(Model model){
+    public String create(Model model) {
         model.addAttribute("music", new MusicDTO());
         return "/sign";
     }
 
     @PostMapping("/save")
-    public  String save(@Validated @ModelAttribute("music") MusicDTO musicDTO , BindingResult bindingResult, RedirectAttributes redirect ){
-        new MusicDTO().validate(musicDTO,bindingResult);
-        if(bindingResult.hasErrors()){
+    public String save(@Validated @ModelAttribute("music") MusicDTO musicDTO, BindingResult bindingResult, RedirectAttributes redirect) {
+        new MusicDTO().validate(musicDTO, bindingResult);
+        if (bindingResult.hasErrors()) {
             return "/sign";
         }
         Music music = new Music();
-        BeanUtils.copyProperties(musicDTO,music);
+        BeanUtils.copyProperties(musicDTO, music);
         musicService.save(music);
-        redirect.addFlashAttribute("mess","thêm mới thành công ");
+        redirect.addFlashAttribute("mess", "thêm mới thành công ");
         return "redirect:/music";
     }
+
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable("id")Integer id ,Model model){
-        model.addAttribute("music",musicService.findAll(id));
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("music", musicService.findAll(id));
         return "/edit";
     }
+
     @PostMapping("/update")
-    public String update(@ModelAttribute("music") MusicDTO musicDTO,Model model){
+    public String update(@ModelAttribute("music") MusicDTO musicDTO, Model model) {
         Music music = new Music();
-        BeanUtils.copyProperties(musicDTO,music);
+        BeanUtils.copyProperties(musicDTO, music);
         musicService.save(music);
         musicService.update(music);
 
-        model.addAttribute("mess","Cập nhập thành công");
+        model.addAttribute("mess", "Cập nhập thành công");
 
         return "redirect:/music";
     }

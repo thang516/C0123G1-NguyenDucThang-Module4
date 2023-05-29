@@ -24,28 +24,28 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(Model model) {
         List<User> userList = userService.findAll();
-        model.addAttribute("userList",userList);
+        model.addAttribute("userList", userList);
         return "/index";
     }
 
     @GetMapping("/create")
-    public String create(Model model){
+    public String create(Model model) {
         model.addAttribute("user", new UserDTO());
         return "/sign";
     }
 
     @PostMapping("/save")
-    public  String save(@Validated @ModelAttribute("user") UserDTO userDTO , BindingResult bindingResult, RedirectAttributes redirect ){
-        new UserDTO().validate(userDTO,bindingResult);
-        if(bindingResult.hasErrors()){
+    public String save(@Validated @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, RedirectAttributes redirect) {
+        new UserDTO().validate(userDTO, bindingResult);
+        if (bindingResult.hasErrors()) {
             return "/sign";
         }
         User user = new User();
-        BeanUtils.copyProperties(userDTO,user);
+        BeanUtils.copyProperties(userDTO, user);
         userService.save(user);
-        redirect.addFlashAttribute("mess","thêm mới thành công ");
+        redirect.addFlashAttribute("mess", "thêm mới thành công ");
         return "redirect:/user";
     }
 

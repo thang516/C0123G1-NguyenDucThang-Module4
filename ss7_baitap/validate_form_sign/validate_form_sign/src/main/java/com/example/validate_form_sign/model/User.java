@@ -11,27 +11,24 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 @Entity
-public class User  {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id ;
+    private Integer id;
 
 
-
-    private  String firstName ;
-
-
-    private  String  lastName ;
+    private String firstName;
 
 
-    private String phone ;
+    private String lastName;
 
 
-    private Integer age ;
+    private String phone;
+
+
+    private Integer age;
     @Email
-    private  String email ;
-
-
+    private String email;
 
 
     public User(Integer id, String firstName, String lastName, String phone, Integer age, String email) {
@@ -101,7 +98,6 @@ public class User  {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
 
 }
