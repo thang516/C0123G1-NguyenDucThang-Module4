@@ -11,12 +11,13 @@ import java.util.List;
 @Service
 public class BookBorrowService implements IBookBorrowService {
     @Autowired
-    private IBookBorrowRepository bookBorrowRepository ;
+    private IBookBorrowRepository bookBorrowRepository;
+
     @Override
     public boolean save(BookBorrow bookBorrow) {
 
         int checkQuantity = bookBorrow.getBook().getQuantity();
-        if(checkQuantity < 0 ){
+        if (checkQuantity < 0) {
             return false;
         }
 

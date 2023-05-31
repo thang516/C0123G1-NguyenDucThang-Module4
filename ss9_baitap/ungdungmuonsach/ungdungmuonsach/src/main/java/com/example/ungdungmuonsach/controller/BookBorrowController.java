@@ -18,73 +18,72 @@ import java.util.List;
 public class BookBorrowController {
 
     @Autowired
-    private IBookBorrowService bookBorrowService ;
+    private IBookBorrowService bookBorrowService;
 
     @Autowired
-    private IBookService bookService ;
-
+    private IBookService bookService;
 
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(Model model) {
         List<Book> bookList = bookService.findAll();
-        model.addAttribute("bookList",bookList);
+        model.addAttribute("bookList", bookList);
         return "/index";
     }
 
     @GetMapping("/{id}/create")
-    public String create(@PathVariable("id")Integer id,Model model){
+    public String create(@PathVariable("id") Integer id, Model model) {
         Book book1 = bookService.findById(id);
-         bookService.save(book1);
-        book1.setQuantity(book1.getQuantity()-1);
-        Integer code = getRandom(10000,999999);
-        BookBorrow bookBorrow = new BookBorrow(code,book1);
-        model.addAttribute("book",bookBorrow.getCode());
+        bookService.save(book1);
+        book1.setQuantity(book1.getQuantity() - 1);
+        Integer code = getRandom(10000, 999999);
+        BookBorrow bookBorrow = new BookBorrow(code, book1);
+        model.addAttribute("book", bookBorrow.getCode());
         boolean flag;
         int borrow;
         List<BookBorrow> numbers = bookBorrowService.findAll();
-         do {
-             flag= true ;
-             borrow=   getRandom(10000,999999) ;
-            for (int i = 0; i < numbers.size() ; i++) {
-                if(numbers.get(i).getCode()==borrow){
+        do {
+            flag = true;
+            borrow = getRandom(10000, 999999);
+            for (int i = 0; i < numbers.size(); i++) {
+                if (numbers.get(i).getCode() == borrow) {
                     flag = false;
                 }
             }
-        }while (!flag);
+        } while (!flag);
 
-        boolean check =  bookBorrowService.save(bookBorrow);
+        boolean check = bookBorrowService.save(bookBorrow);
 
-        if(!check){
+        if (!check) {
             return "/error";
         }
         return "/result";
     }
 
     @GetMapping("/borrow")
-    public String select(Model model){
+    public String select(Model model) {
         List<BookBorrow> bookBorrowList = bookBorrowService.findAll();
-        model.addAttribute("bookBorrowList",bookBorrowList);
+        model.addAttribute("bookBorrowList", bookBorrowList);
         return "/home";
     }
 
     @GetMapping("/{id}/edit")
-    public String update(@PathVariable("id")Integer id,RedirectAttributes redirectAttributes ){
-        BookBorrow bookBorrow=bookBorrowService.findById(id);
-         Book book = bookBorrow.getBook();
-        book.setQuantity(book.getQuantity()+1);
+    public String update(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+        BookBorrow bookBorrow = bookBorrowService.findById(id);
+        Book book = bookBorrow.getBook();
+        book.setQuantity(book.getQuantity() + 1);
         bookBorrowService.delete(id);
         bookService.save(book);
-        redirectAttributes.addFlashAttribute("mess" , "You have returned the book");
+        redirectAttributes.addFlashAttribute("mess", "You have returned the book");
         return "redirect:/book";
     }
 
-        public int getRandom(int min, int max) {
-            return (int) ((Math.random() * (max - min)) + min);
+    public int getRandom(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
     @ExceptionHandler(Exception.class)
-    public  String handler(){
+    public String handler() {
 
         return "error";
     }

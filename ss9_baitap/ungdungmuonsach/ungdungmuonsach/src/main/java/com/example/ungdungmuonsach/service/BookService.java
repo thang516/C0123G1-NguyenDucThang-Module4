@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class BookService implements IBookService {
     @Autowired
-    private IBookRepository bookRepository ;
+    private IBookRepository bookRepository;
 
     @Override
     public void save(Book book1) {

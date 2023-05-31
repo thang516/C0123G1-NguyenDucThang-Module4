@@ -24,7 +24,7 @@ public class BookBorrow {
     private Book book;
 
 
-    private boolean status =false;
+    private boolean status = false;
 
 
     public BookBorrow() {
