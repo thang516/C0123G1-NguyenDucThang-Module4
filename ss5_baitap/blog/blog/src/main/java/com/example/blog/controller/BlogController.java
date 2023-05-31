@@ -29,6 +29,7 @@ public class BlogController {
     public String index(@RequestParam(value = "page", defaultValue = "0")int  page, Model model){
         Page<Blog> blogList = blogService.getAllPage(page);
         model.addAttribute("blogList",blogList);
+//        model.addAttribute("mess", null);
         return "/index";
     }
     @GetMapping("/create")
@@ -39,9 +40,10 @@ public class BlogController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Blog blog ,@ModelAttribute Category category, RedirectAttributes redirect){
+    public String save(@ModelAttribute Blog blog ,@ModelAttribute Category category, RedirectAttributes redirect, Model model){
         blogService.save(blog);
         categoryService.save(category);
+        model.addAttribute("flagUpdated", true);
         redirect.addFlashAttribute("mess","Add New Successfully");
         return "redirect:/blog";
     }
@@ -53,7 +55,7 @@ public class BlogController {
         return "redirect:/blog";
     }
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable("id") Integer id ,Model model ){
+    public String edit(@PathVariable("id") Integer id ,Model model, RedirectAttributes redirectAttributes ){
         model.addAttribute("blog",blogService.findById(id));
         model.addAttribute("categoryList",categoryService.getAll());
         return "/edit";

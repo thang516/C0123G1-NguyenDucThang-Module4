@@ -11,21 +11,20 @@ public class UserDTO implements Validator {
     private Integer id;
 
 
-    @Size(max = 45, message = "Tên Không Được Dài hơn 100 ký tự")
-    @NotBlank(message = "Điểm Không Được Để Trống")
+    @Size(max = 45, message = "Tên Không Được Dài hơn 45 ký tự")
     private String firstName;
 
-    @Size(max = 45, message = "Tên Không Được Dài hơn 100 ký tự")
-    @NotBlank(message = "Điểm Không Được Để Trống")
+    @Size(max = 45, message = "Tên Không Được Dài hơn 45 ký tự")
+
     private String lastName;
 
     @Pattern(regexp = "^0[0-9]{9,10}$", message = "SỐ điện thoại không đúng định dạng ")
     private String phone;
 
-    @Min(value = 0, message = "Điểm không đc nhỏ hơn 0 ")
+    @Min(value = 18, message = "Tuổi không được nhỏ hơn 18 ")
     @NotNull
     private Integer age;
-    @Email
+    @Email(message = "Bạn cần nhập gmail abc@gmail.com để đúng định dạng")
     private String email;
 
     public UserDTO() {

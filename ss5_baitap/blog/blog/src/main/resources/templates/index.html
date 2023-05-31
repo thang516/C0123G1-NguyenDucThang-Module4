@@ -144,14 +144,20 @@
 
 <script>
     let inputId = document.getElementById("inputId");
-    if (inputId && inputId.innerText) {
+    console.log(inputId)
+    console.log(inputId.innerText);
+
+    if (inputId && inputId.innerText != null) {
         swal({
             title: "SUCCESSFULLY",
             text: inputId.innerText,
             icon: "success",
             button: "OK",
         }).then((idOk) => {
-            if (idOk) inputId.innerText = ''
+            if (idOk) {
+                console.log(99)
+                inputId.innerText = '';
+            }
         });
     }
 </script>

@@ -1,6 +1,6 @@
 package com.example.validate_form_sign.service;
 
-import com.example.validate_form_sign.Repository.IUserRepository;
+import com.example.validate_form_sign.repository.IUserRepository;
 import com.example.validate_form_sign.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

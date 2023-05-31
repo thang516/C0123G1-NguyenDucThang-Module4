@@ -1,4 +1,4 @@
-package com.example.validate_form_sign.Repository;
+package com.example.validate_form_sign.repository;
 
 import com.example.validate_form_sign.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
