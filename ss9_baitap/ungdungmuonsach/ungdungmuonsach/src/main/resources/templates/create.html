@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="book" >
+        <span th:text="${book}"></span>
+</div>
+
+<div>
+    <a th:href="@{/book}">
+        <button>Back</button></a>
+</div>
+
+</body>
+</html>

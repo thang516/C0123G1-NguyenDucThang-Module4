@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -26,10 +27,11 @@ public class BlogController {
     private ICategoryService categoryService ;
 
     @GetMapping("")
-    public String index(@RequestParam(value = "page", defaultValue = "0")int  page, Model model){
+    public String index(@RequestParam(value = "page", defaultValue = "0")int  page, Model model, HttpServletResponse response){
         Page<Blog> blogList = blogService.getAllPage(page);
         model.addAttribute("blogList",blogList);
 //        model.addAttribute("mess", null);
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, private, o-age=0");
         return "/index";
     }
     @GetMapping("/create")
@@ -61,7 +63,7 @@ public class BlogController {
         return "/edit";
     }
     @PostMapping("/update")
-    public  String update(@ModelAttribute("blog") Blog blog,RedirectAttributes redirect){
+    public  String update(@ModelAttribute("blog") Blog blog, RedirectAttributes redirect){
         blogService.update(blog);
         redirect.addFlashAttribute("mess","Update  Successfully");
         return "redirect:/blog";
