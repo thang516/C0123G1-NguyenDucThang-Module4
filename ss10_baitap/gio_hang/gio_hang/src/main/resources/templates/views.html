@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
+
+<link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+        rel="stylesheet"
+/>
+<head>
+    <title>Title</title>
+</head>
+<body th:object="${shopping}">
+
+<div style="width: 100%;  height: 800px" class="row">
+    <div style="background-color: #e0e0e0" class="col-lg-2 col-md-1 col-sm"></div>
+    <div class="col-lg-8 col-md-10 col-sm-12">
+        <div style="width: 100%; height: auto" class="row">
+            <div class="row" style="height: auto; text-align: center; padding-bottom: 30px"><h1>Shop Hoa Cẩm Tú </h1>
+            </div>
+            <div style="background-color: white" class="col-lg-6 col-md-12"><img style="margin: 100px 20px" width="100%"
+                                                                                 ; th:src="*{img}"
+                                                                                 class="rounded float-start" alt="...">
+            </div>
+            <div style="background-color: white" class="col-lg-6 col-md-12">
+                <div style="height: 100px" class="row">
+                    <h2 th:c="*{name}"></h2>
+                </div>
+                <div style="height: auto" class="row">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><h4>Mã Sản Phẩm </h4></td>
+                            <td th:text="${shopping.productCode}"></td>
+                        </tr>
+                        <tr>
+                            <td><h4>Giá</h4></td>
+                            <td th:text="${shopping.price}"></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="row" style="height: auto">
+                    <div style="display: inline-block">
+                        <h4>Mô tả </h4> <span th:text="${shopping.description}"></span>
+                    </div>
+                </div>
+                <a th:href="@{/shopping/add-to-card/{id}(id=${shopping.getId()})}">
+                    <button>Thêm Vào Giỏ Hàng</button>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+    <div style="background-color: #e0e0e0" class="col-lg-2 col-md-1 col-sm"></div>
+</div>
+
+
+</body>
+</html>
+
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
