@@ -5,7 +5,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 
 @Entity
-public class Shopping {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class Shopping {
     @NotNull
     private String description ;
     private String img;
-    public Shopping() {
+    public Product() {
     }
 
-    public Shopping(Integer id, Integer productCode, String name, Double price, String description ,String img) {
+    public Product(Integer id, Integer productCode, String name, Double price, String description , String img) {
         this.id = id;
         this.productCode = productCode;
         this.name = name;
@@ -33,7 +33,7 @@ public class Shopping {
         this.img = img;
     }
 
-    public Shopping(Integer productCode, String name, Double price, String description,String img) {
+    public Product(Integer productCode, String name, Double price, String description, String img) {
         this.productCode = productCode;
         this.name = name;
         this.price = price;

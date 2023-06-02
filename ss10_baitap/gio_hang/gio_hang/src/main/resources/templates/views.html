@@ -13,7 +13,7 @@
 <head>
     <title>Title</title>
 </head>
-<body th:object="${shopping}">
+<body th:object="${product}">
 
 <div style="width: 100%;  height: 800px" class="row">
     <div style="background-color: #e0e0e0" class="col-lg-2 col-md-1 col-sm"></div>
@@ -33,21 +33,21 @@
                     <table class="table table-borderless">
                         <tr>
                             <td><h4>Mã Sản Phẩm </h4></td>
-                            <td th:text="${shopping.productCode}"></td>
+                            <td th:text="${product.productCode}"></td>
                         </tr>
                         <tr>
                             <td><h4>Giá</h4></td>
-                            <td th:text="${shopping.price}"></td>
+                            <td th:text="${product.price}"></td>
                         </tr>
                     </table>
 
                 </div>
                 <div class="row" style="height: auto">
                     <div style="display: inline-block">
-                        <h4>Mô tả </h4> <span th:text="${shopping.description}"></span>
+                        <h4>Mô tả </h4> <span th:text="${product.description}"></span>
                     </div>
                 </div>
-                <a th:href="@{/shopping/add-to-card/{id}(id=${shopping.getId()})}">
+                <a th:href="@{/product/add-to-card/{id}(id=${product.getId()})}">
                     <button>Thêm Vào Giỏ Hàng</button>
                 </a>
             </div>

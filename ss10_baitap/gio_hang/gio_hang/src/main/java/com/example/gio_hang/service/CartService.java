@@ -1,7 +1,6 @@
 package com.example.gio_hang.service;
 
-import com.example.gio_hang.model.Shopping;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.gio_hang.model.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -11,9 +10,9 @@ public class CartService implements ICartService {
 
 
     @Override
-    public boolean checkExist(Shopping shopping1, Map<Shopping, Integer> cart) {
-        for (Map.Entry<Shopping, Integer> x : cart.entrySet()) {
-            if (x.getKey().getId().equals(shopping1.getId())) {
+    public boolean checkExist(Product product1, Map<Product, Integer> cart) {
+        for (Map.Entry<Product, Integer> x : cart.entrySet()) {
+            if (x.getKey().getId().equals(product1.getId())) {
                 return true;
             }
         }
@@ -21,9 +20,9 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public Map.Entry<Shopping, Integer> shoppingEntry(Shopping shopping1, Map<Shopping, Integer> cart) {
-        for (Map.Entry<Shopping,Integer> x : cart.entrySet()) {
-            if(x.getKey().getId().equals(shopping1.getId())){
+    public Map.Entry<Product, Integer> shoppingEntry(Product product1, Map<Product, Integer> cart) {
+        for (Map.Entry<Product,Integer> x : cart.entrySet()) {
+            if(x.getKey().getId().equals(product1.getId())){
                 return x;
             }
         }
@@ -31,9 +30,9 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public double getTotal(Map<Shopping, Integer> cart) {
+    public double getTotal(Map<Product, Integer> cart) {
         double sum = 0;
-        for (Map.Entry<Shopping, Integer> e :
+        for (Map.Entry<Product, Integer> e :
                 cart.entrySet()) {
             sum = sum + e.getKey().getPrice() * e.getValue();
         }

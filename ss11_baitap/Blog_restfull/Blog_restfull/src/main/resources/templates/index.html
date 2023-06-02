@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <h1 style="color: hotpink ; text-align: center">BLog Daily</h1>
+</div>
+
+<div>
+    <div style="display: flex;justify-content: end;padding: 20px 82px">
+        <form th:action="@{/blog/findCategory}"  th:object="${blogList}" method="post">
+            <div class="form-input" style="display: flex">
+                <span style="margin-left: 5px;margin-top: 5px">Watch Category </span>
+                <input type="text"  class="form-control"   placeholder="nameCategory" name="categoryName"/>
+                <button class="btn btn-success" style="color: black;background-color: palevioletred">Search</button>
+            </div>
+        </form>
+        <a th:href="@{/blog}">
+            <button class="btn btn-success" style="margin-left: 13px;background-color:black;color: palevioletred ">Reset</button>
+        </a>
+
+    </div>
+</div>
+
+<div style="display: flex;justify-content: end">
+<form th:action="@{/blog/search}"  th:object="${blogList}" method="post">
+    <div class="form-input" style="display: flex">
+        <span style="margin-left: 5px;margin-top: 5px">Search</span>
+        <input type="text"  class="form-control" placeholder="title" name="title"/>
+        <button class="btn btn-success" style="color: black;background-color: palevioletred">Search</button>
+    </div>
+</form>
+    <a th:href="@{/blog}">
+        <button class="btn btn-success" style="margin-left: 13px;background-color:black;color: palevioletred ">Reset</button>
+    </a>
+        <a th:href="@{/blog/create}">
+            <button class="btn btn-success" style="background-color: palevioletred ; color: black;margin-left: 9px;">Create</button>
+        </a>
+</div>
+
+<div>
+
+
+    <div th:if="${mess}">
+        <span hidden id="inputId" th:text="${mess}"></span>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Create Time</th>
+            <th>Update time</th>
+            <th>Category</th>
+            <th></th>
+            <th>Function</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blog : ${blogList}">
+            <td th:text="${blog.getId()}"></td>
+            <td th:text="${blog.getTitle()}"></td>
+            <td th:text="${blog.getContent()}"></td>
+            <td th:text="${blog.getAuthor()}"></td>
+            <td th:text="${blog.getCreateTime()}"></td>
+            <td th:text="${blog.getUpdateTime()}"></td>
+            <td th:text="${blog.getCategory().getNameCategory()}"></td>
+            <td>
+                <button style="background-color: palevioletred ; color: black" type="button"
+                        th:attr="onclick=|inforDelete(${blog.getId()},'${blog.getTitle()}')|"
+                        class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Delete
+                </button>
+                <a style="display: none" id="actionDelete"></a>
+            </td>
+            <td>
+                <a th:href="@{/blog/{id}/edit(id=${blog.getId()})}">
+                    <button style="background-color: palevioletred ; color: black " class="btn btn-success">Edit
+                    </button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{blog/{id}/view(id=${blog.getId()})}">
+                    <button style="background-color: palevioletred ; color: black " class="btn btn-success">Detail
+                    </button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <nav style="margin-left: 400px ; display: flex;justify-content: end;" aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                <li><a class="page-link" th:href="@{/blog(page=${blogList.number -1 })}"
+                       th:if="${blogList.hasPrevious()}" tabindex="-1">Previous</a></li>
+                <li class="page-item">
+                <li><a class="page-link" th:href="@{/blog(page=${blogList.number  +1 })}" th:if="${blogList.hasNext()}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <form th:action="@{/blog/delete}" method="get">-->
+<!--            <div class="modal-body">-->
+<!--                <input type="hidden" id="deleteId" name="deleteId">-->
+<!--                <span> Do you want to delete blog</span><span style="color:  red" id="deleteName"></span><span>???</span>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>-->
+<!--                <button type="submit" class="btn btn-primary">Yes</button>-->
+<!--            </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    let inputId = document.getElementById("inputId");
+    console.log(inputId)
+    console.log(inputId.innerText);
+
+    if (inputId && inputId.innerText != null) {
+        swal({
+            title: "SUCCESSFULLY",
+            text: inputId.innerText,
+            icon: "success",
+            button: "OK",
+        }).then((idOk) => {
+            if (idOk) {
+                console.log(99)
+                inputId.innerText = '';
+            }
+        });
+    }
+</script>
+
+<script>
+    function inforDelete(id, title) {
+        swal({
+            title: `Are you sure delete blog "${title}"?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((isDelete) => {
+                if (isDelete) {
+                    const actionDelete = document.getElementById('actionDelete');
+                    actionDelete.setAttribute('href', `/blog/delete?deleteId=${id}`)
+                    actionDelete.click();
+                }
+            });
+    }
+
+
+</script>
+
+</html>
