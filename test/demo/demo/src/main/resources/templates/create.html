@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/student/save}" method="post" th:object="${student}">
+    <label>Name</label>
+    <input type="text" th:field="*{name}" required>
+    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <label>Point</label>
+    <input type="number" th:field="*{point}" required>
+    <p th:if="${#fields.hasErrors()}" th:errors="*{'point'}" style="color: red"></p>
+    <label>Gender</label>
+    <input type="text" th:field="*{gender}">
+    <p th:if="${#fields.hasErrors()}" th:errors="*{'gender'}" style="color: red"></p>
+    <label>Class</label>
+    <select th:field="*{clazz}">
+
+        <option th:each="clazz : ${clazzList}" th:text="${clazz.nameClazz}" th:value="${clazz.id}"></option>
+        <p style="color: red" th:if="${#fields.hasErrors('clazz')}" th:errors="*{clazz}"></p>
+    </select>
+    <button>Create</button>
+
+</form>
+
+<!--<form th:action="@{/student/save}"  method="post" th:object="${student}"  >-->
+<!--  <label>Name</label>-->
+<!--  <input type="text" th:field="*{name}"/>-->
+<!--  <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+<!--  <label>Point</label>-->
+<!--  <input type="number" th:field="*{point}"/>-->
+<!--  <p style="color: red" th:if="${#fields.hasErrors('point')}" th:errors="*{point}"></p>-->
+<!--  <label>Clazz</label>-->
+<!--    <select th:field="*{clazz}">-->
+<!--      <option th:each="clazz : ${clazzList}"  th:text="${clazz.nameClazz}" th:value="${clazz.id}"/>-->
+<!--      <p style="color: red" th:if="${#fields.hasErrors('clazz')}" th:value="*{clazz}"></p>-->
+
+<!--      </option>-->
+<!--    </select>-->
+<!--  <label>Gender</label>-->
+<!--  <input type="text" th:field="*{gender}"/>-->
+<!--  <p style="color: red" th:if="${#fields.hasErrors('gender')}" th:value="*{gender}"></p>-->
+<!--  <button>submit</button>-->
+<!--</form>-->
+
+
+</body>
+</html>
