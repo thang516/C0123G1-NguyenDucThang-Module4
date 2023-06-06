@@ -14,11 +14,10 @@
 <div th:if="${mess}">
     <span th:text="${mess}"></span>
 </div>
-
 <table>
     <thead>
     <tr>
-        <th>ID</th>
+         <th>ID</th>
         <th>Name</th>
         <th>point</th>
         <th>Gender</th>
@@ -32,24 +31,14 @@
         <td th:text="${student.name}"></td>
         <td th:text="${student.point}"></td>
         <td>
-            <span th:text="${student.gender} == 0 ">Male</span>
-            <span th:text="${student.gender} == 1 ">FeMale</span>
-            <span th:text="${student.gender} == '' ">other</span>
-
+            <span th:text="${student.gender == 0 } ">Male</span>
+            <span th:text="${student.gender == 1 } ">FEMale</span>
+            <span th:text="${student.gender == '' } ">other</span>
         </td>
         <td th:text="${student.clazz.nameClazz}"></td>
-        <td>
-            <button th:attr="onclick=|inforDelete(${student.getId()},'${student.getName()}')|"> DELETE</button>
-            <a id="actionDelete" hidden></a>
-        </td>
-        <td>
-            <a th:href="@{/student/{id}/edit(id=${student.getId()})}">
-                <button>Update</button></a>
-        </td>
     </tr>
     </tbody>
 </table>
-
 
 <!--<table class="table table-striped">-->
 <!--  <thead>-->

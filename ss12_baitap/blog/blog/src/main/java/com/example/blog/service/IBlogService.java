@@ -28,5 +28,7 @@ public interface IBlogService {
 
     List<Blog> searchBlog(String title);
 
-    List<Blog> getAllSlice(Integer number);
+    Slice<Blog> getAllSlice(Pageable page);
+
+//    List<Blog> getAllSlice(Integer number);
 }

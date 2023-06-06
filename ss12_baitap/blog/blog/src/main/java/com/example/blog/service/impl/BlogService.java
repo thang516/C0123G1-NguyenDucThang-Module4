@@ -67,16 +67,21 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public List<Blog> getAllSlice(Integer number) {
-        int numb = 0;
-        List<Blog> blogList = blogRepository.findAll();
-        List<Blog> blogs = new ArrayList<>();
-        for (int i = 0; i < blogList.size() && i<number*5; i++) {
-            if(i>=(number-1)*5){
-                blogs.add(numb,blogList.get(i));
-                numb++;
-            }
-        }
-        return blogs;
+    public Slice<Blog> getAllSlice(Pageable page) {
+        return blogRepository.findAll(page);
     }
+
+//    @Override
+//    public List<Blog> getAllSlice(Integer number) {
+//        int numb = 0;
+//        List<Blog> blogList = blogRepository.findAll();
+//        List<Blog> blogs = new ArrayList<>();
+//        for (int i = 0; i < blogList.size() && i<number*5; i++) {
+//            if(i>=(number-1)*5){
+//                blogs.add(numb,blogList.get(i));
+//                numb++;
+//            }
+//        }
+//        return blogs;
+//    }
 }

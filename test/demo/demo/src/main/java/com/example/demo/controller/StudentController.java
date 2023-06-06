@@ -26,51 +26,20 @@ public class StudentController {
     @Autowired
     private IClazzService clazzService;
 
-    @GetMapping("")
-    public  String index(Model model){
-        List<Student> studentList = iStudentService.findAll();
-        model.addAttribute("studentList" ,studentList);
-        return "/index";
-    }
+   @GetMapping("")
+    public String index(Model model){
+       List<Student> studentList = iStudentService.findAll();
+       model.addAttribute("studentList",studentList);
+       return "/index";
+   }
 
-    @GetMapping("/create")
+   @GetMapping("/create")
     public String create(Model model){
-        model.addAttribute("student",new Student());
-        model.addAttribute("clazzList",clazzService.findAll());
-        return "/create";
-    }
-    @PostMapping("/save")
-    public String save(@Validated @ModelAttribute("student") Student student,@ModelAttribute("clazz") Clazz clazz ,BindingResult bindingResult , RedirectAttributes redirectAttributes){
-      if(bindingResult.hasErrors()){
-          return "/create";
-      }
+       model.addAttribute("student" ,new Student());
+       model.addAttribute("classList",clazzService.findAll());
+       return "/create";
+   }
 
-        iStudentService.save(student);
-        clazzService.save(clazz);
-        redirectAttributes.addFlashAttribute("mess","theem mowis thanh cong");
-        return "redirect:/student";
-
-    }
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") Integer id ,RedirectAttributes redirectAttributes){
-        iStudentService.delete(id);
-        redirectAttributes.addFlashAttribute("mess","Xoas thanh cong ");
-        return "redirect:/student";
-    }
-
-    @GetMapping("/{id}/edit")
-    public String update(@PathVariable("id") Integer id ,Model model){
-        model.addAttribute("student",iStudentService.findById(id));
-        model.addAttribute("clazzList",clazzService.findAll());
-        return "/edit";
-
-    }
-    @PostMapping("/update")
-    public String update(@ModelAttribute("student") Student student , RedirectAttributes redirectAttributes){
-        iStudentService.update(student);
-        redirectAttributes.addFlashAttribute("mess" ,"update Thanh cong ");
-        return "redirect:/student";
-    }
     //
 //    @GetMapping("")
 //    public String index(Model model) {

@@ -4,6 +4,9 @@ package com.example.blog.controller;
 import com.example.blog.model.Blog;
 import com.example.blog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +21,15 @@ public class BlogRestController {
     @Autowired
     private IBlogService blogService;
 
-    @GetMapping("")
-    public ResponseEntity<List<Blog>> getList() {
-        return new ResponseEntity<>(blogService.getAll(), HttpStatus.OK);
-    }
+//    @GetMapping("")
+//    public ResponseEntity<List<Blog>> getList() {
+//        return new ResponseEntity<>(blogService.getAll(), HttpStatus.OK);
+//    }
 
-    @GetMapping("/loadMore")
-    public ResponseEntity<List<Blog>> getList(@RequestParam("number") Integer number) {
-        List<Blog> blogSlice = blogService.getAllSlice(number);
-        return new ResponseEntity<>(blogSlice, HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<Slice<Blog>> getList(@RequestParam(value = "page" ,defaultValue = "0") Integer page) {
+        Pageable  pageable = PageRequest.of(page,3);
+        return new ResponseEntity<>(blogService.getAllSlice(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
