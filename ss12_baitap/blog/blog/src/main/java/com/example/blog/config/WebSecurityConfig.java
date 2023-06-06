@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//Sử dụng thuật toán Bcrypt để mã hóa password.
+    //Sử dụng thuật toán Bcrypt để mã hóa password.
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
