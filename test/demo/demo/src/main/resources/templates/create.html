@@ -6,25 +6,44 @@
 </head>
 <body>
 
+
 <form th:action="@{/student/save}" method="post" th:object="${student}">
     <label>Name</label>
     <input type="text" th:field="*{name}" required>
-    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <p style="color: red" th:text="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
     <label>Point</label>
-    <input type="number" th:field="*{point}" required>
-    <p th:if="${#fields.hasErrors()}" th:errors="*{'point'}" style="color: red"></p>
+    <input type="text" th:field="*{point}" required>
+    <p style="color: red" th:text="${#fields.hasErrors('point')}" th:errors="*{point}"></p>
     <label>Gender</label>
-    <input type="text" th:field="*{gender}">
-    <p th:if="${#fields.hasErrors()}" th:errors="*{'gender'}" style="color: red"></p>
-    <label>Class</label>
+    <input type="text" th:field="*{gender}" required>
+    <p style="color: red" th:text="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+    <label>Clazz</label>
     <select th:field="*{clazz}">
-
-        <option th:each="clazz : ${clazzList}" th:text="${clazz.nameClazz}" th:value="${clazz.id}"></option>
-        <p style="color: red" th:if="${#fields.hasErrors('clazz')}" th:errors="*{clazz}"></p>
+        <option th:each="clazzz : ${clazzList}" th:text="${clazzz.nameClazz}" th:value="${clazzz.id}"></option>
     </select>
-    <button>Create</button>
-
+    <button type="submit" >Create</button>
 </form>
+
+
+<!--<form th:action="@{/student/save}" method="post" th:object="${student}">-->
+<!--    <label>Name</label>-->
+<!--    <input type="text" th:field="*{name}" required>-->
+<!--    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+<!--    <label>Point</label>-->
+<!--    <input type="number" th:field="*{point}" required>-->
+<!--    <p th:if="${#fields.hasErrors()}" th:errors="*{'point'}" style="color: red"></p>-->
+<!--    <label>Gender</label>-->
+<!--    <input type="text" th:field="*{gender}">-->
+<!--    <p th:if="${#fields.hasErrors()}" th:errors="*{'gender'}" style="color: red"></p>-->
+<!--    <label>Class</label>-->
+<!--    <select th:field="*{clazz}">-->
+
+<!--        <option th:each="clazz : ${clazzList}" th:text="${clazz.nameClazz}" th:value="${clazz.id}"></option>-->
+<!--        <p style="color: red" th:if="${#fields.hasErrors('clazz')}" th:errors="*{clazz}"></p>-->
+<!--    </select>-->
+<!--    <button>Create</button>-->
+
+<!--</form>-->
 
 <!--<form th:action="@{/student/save}"  method="post" th:object="${student}"  >-->
 <!--  <label>Name</label>-->
